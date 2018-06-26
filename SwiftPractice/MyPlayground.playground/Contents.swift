@@ -180,3 +180,8 @@ if let lastTeen = ages.last(where: { $0.hasSuffix("teen") }),
 } else {
     print("No teenagers around here.")
 }
+
+// MARK: - 5. Testing Sequence Elements
+
+let values = [10, 8, 12, 20]
+let allEven = values.allSatisfy{ $0 % 2 == 0 }
