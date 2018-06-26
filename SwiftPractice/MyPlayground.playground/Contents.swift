@@ -224,3 +224,41 @@ do {
 } catch {
     print("\(error)")
 }
+
+// MARK: - 6.2. Conditional conformance runtime queries
+
+class Instrument {
+    let brand: String
+    
+    init(brand: String = "") {
+        self.brand = brand
+    }
+}
+
+protocol Tuneable {
+    func tune()
+}
+
+class Keyboard: Instrument, Tuneable {
+    func tune() {
+        print("\(brand) keyboard tuning.")
+    }
+}
+
+// Use where to constrain Array to conform to Tuneable as long as Element does.
+extension Array: Tuneable where Element: Tuneable {
+    internal func tune() {
+        forEach { $0.tune() }
+    }
+}
+
+let instrument = Instrument()
+let keyboard = Keyboard.init(brand: "Roland")
+let instruments = [instrument, keyboard]
+
+// Check if instruments implements Tuneable and tune it if the test succeeds. In this example, the array can't be cast to Tuneable because the Instrument type isn't tuneable. If you created an array of two keyboards, the test would pass and the keyboards would be tuned.
+if let keyboards = instruments as? Tuneable {
+    keyboards.tune()
+} else {
+    print("Can't tune instrument.")
+}
