@@ -185,3 +185,42 @@ if let lastTeen = ages.last(where: { $0.hasSuffix("teen") }),
 
 let values = [10, 8, 12, 20]
 let allEven = values.allSatisfy{ $0 % 2 == 0 }
+
+// MARK: - 6. Conditional Conformance Updates
+
+// MARK: - 6.1. Conditional conformance in extensions
+
+struct Tutorial: Hashable, Codable {
+    let title: String
+    let author: String
+}
+
+struct Screencast<Tutorial> {
+    let author: String
+    let tutorial: Tutorial
+}
+
+// Constrain Screencast to conform to Hashable and Codable if Tutorial does.
+extension Screencast: Equatable where Tutorial: Equatable {}
+extension Screencast: Hashable where Tutorial: Hashable {}
+extension Screencast: Codable where Tutorial: Codable {}
+
+let swift41Tutorial = Tutorial.init(title: "What's New in Swift 4.1?", author: "Henry")
+let swift42Tutorial = Tutorial.init(title: "What's New in Swift 4.2?", author: "Henry")
+let swift41Screencast = Screencast(author: "Henry Fan", tutorial: swift41Tutorial)
+let swift42Screencast = Screencast(author: "Henry Fan", tutorial: swift42Tutorial)
+
+// Swift 4.2 adds a default implementation for Equatable conditional conformance to an extension:
+let sameScreencast = swift41Screencast == swift42Screencast
+
+// Add screencasts to sets and dictionaries and encode them
+let screencastsSet: Set = [swift41Screencast, swift42Screencast]
+let screencastsDictionary = [swift41Screencast: "Swift 4.1", swift42Screencast: "Swift 4.2"]
+
+let screencasts = [swift41Screencast, swift42Screencast]
+let encoder = JSONEncoder()
+do {
+    try encoder.encode(screencasts)
+} catch {
+    print("\(error)")
+}
