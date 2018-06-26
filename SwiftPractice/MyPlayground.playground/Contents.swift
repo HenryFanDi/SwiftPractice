@@ -155,3 +155,28 @@ enum BlogPost: CaseIterable {
         return [.article, .tutorial(updated: true), .tutorial(updated: false)]
     }
 }
+
+// MARK: - 4. New Sequence Methods
+
+let ages = ["ten", "twelve", "thirteen", "nineteen", "eighteen", "seventeen", "fourteen",  "eighteen",
+            "fifteen", "sixteen", "eleven"]
+
+// index(where:) becomes firstIndex(where:), and index(of:) becomes firstIndex(of:) to remain consistent with first(where:)
+if let firstTeen = ages.first(where: { $0.hasSuffix("teen") }),
+    let firstIndex = ages.firstIndex(where: { $0.hasSuffix("teen") }),
+    let firstMajorIndex = ages.firstIndex(of: "eighteen") {
+    print("Teenager number \(firstIndex + 1) is \(firstTeen) years old.")
+    print("Teenager number \(firstMajorIndex + 1) isn't a minor anymore.")
+} else {
+    print("No teenagers around here.")
+}
+
+// Simply use last(where:), lastIndex(where:) and lastIndex(of:) to find the previous element and specific indices in ages
+if let lastTeen = ages.last(where: { $0.hasSuffix("teen") }),
+    let lastIndex = ages.lastIndex(where: { $0.hasSuffix("teen") }),
+    let lastMajorIndex = ages.lastIndex(of: "eighteen") {
+    print("Teenager number \(lastIndex + 1) is \(lastTeen) years old.")
+    print("Teenager number \(lastMajorIndex + 1) isn't a minor anymore.")
+} else {
+    print("No teenagers around here.")
+}
