@@ -262,3 +262,21 @@ if let keyboards = instruments as? Tuneable {
 } else {
     print("Can't tune instrument.")
 }
+
+// MARK: - 6.3. Hashable conditional conformance improvements in the standard library
+
+// Optionals, arrays, dictionaries and ranges are Hashable in Swift 4.2 when their elements are Hashable as well:
+// You add cMajor and aMinor to chords and versions. This wasn’t possible prior to 4.1 because String?, [String], [String: [String]?] and CountableClosedRange<Int> weren’t Hashable.
+struct Chord: Hashable {
+    let name: String
+    let description: String?
+    let notes: [String]
+    let signature: [String: [String]?]
+    let frequency: CountableClosedRange<Int>
+}
+let cMajor = Chord(name: "C", description: "C major", notes: ["C", "E",  "G"],
+                   signature: ["sharp": nil,  "flat": nil], frequency: 432...446)
+let aMinor = Chord(name: "Am", description: "A minor", notes: ["A", "C", "E"],
+                   signature: ["sharp": nil, "flat": nil], frequency: 440...446)
+let chords: Set = [cMajor, aMinor]
+let versions = [cMajor: "major", aMinor: "minor"]
