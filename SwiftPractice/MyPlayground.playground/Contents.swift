@@ -280,3 +280,25 @@ let aMinor = Chord(name: "Am", description: "A minor", notes: ["A", "C", "E"],
                    signature: ["sharp": nil, "flat": nil], frequency: 440...446)
 let chords: Set = [cMajor, aMinor]
 let versions = [cMajor: "major", aMinor: "minor"]
+
+// MARK: - 7. Hashable Improvements
+
+class Country: Hashable {
+    let name: String
+    let capital: String
+    
+    init(name: String, capital: String) {
+        self.name = name
+        self.capital = capital
+    }
+    
+    static func ==(lhs: Country, rhs: Country) -> Bool {
+        return lhs.name == rhs.name && lhs.capital == rhs.capital
+    }
+    
+    // Replaced hashValue with hash(into:) in Country. The function uses combine() to feed the class properties into hasher
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(capital)
+    }
+}
