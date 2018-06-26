@@ -319,3 +319,29 @@ extension Bool {
 
 var isOn = true
 isOn.toggle()
+
+// MARK: - 10. New Compiler Directives
+
+//#warning("There are shorter implementations out there.")
+
+let numbers = [1, 2, 3, 4, 5]
+var sum = 0
+for number in numbers {
+    sum += number
+}
+print(sum)
+
+//#error("Please fill in your credentials.")
+
+let username = "Henry"
+let password = "88888"
+switch (username.filter { $0 != " " }, password.filter { $0 != " " }) {
+case ("", ""):
+    print("Invalid username and password.")
+case ("", _):
+    print("Invalid username.")
+case (_, ""):
+    print("Invalid password.")
+case (_, _):
+    print("Logged in succesfully.")
+}
