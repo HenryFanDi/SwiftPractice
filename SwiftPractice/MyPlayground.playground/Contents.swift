@@ -308,3 +308,14 @@ class Country: Hashable {
 var greetings = ["Hello", "Hi", "Goodbye", "Bye"]
 greetings.removeAll { $0.count > 3 }
 print(greetings)
+
+// MARK: - 9. Toggling Boolean States
+
+extension Bool {
+    mutating func toggle() {
+        self = !self
+    }
+}
+
+var isOn = true
+isOn.toggle()
