@@ -345,3 +345,10 @@ case (_, ""):
 case (_, _):
     print("Logged in succesfully.")
 }
+
+// MARK: - 11. New Pointer Functions
+
+// You had to create a copy of value to make both functions work. Swift 4.2 overloads these functions for constants
+let value = 10
+withUnsafeBytes(of: value) { pointer in print(pointer.count) }
+withUnsafePointer(to: value) { pointer in print(pointer.hashValue) }
