@@ -302,3 +302,9 @@ class Country: Hashable {
         hasher.combine(capital)
     }
 }
+
+// MARK: - 8. Removing Elements From Collections
+
+var greetings = ["Hello", "Hi", "Goodbye", "Bye"]
+greetings.removeAll { $0.count > 3 }
+print(greetings)
