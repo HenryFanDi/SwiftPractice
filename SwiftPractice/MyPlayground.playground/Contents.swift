@@ -395,3 +395,12 @@ let standard = CustomFactorial()
 print(standard.factorial(5))
 let custom = CustomFactorial.init(true)
 print(custom.factorial(5))
+
+// MARK: - B. Miscellaneous Bits and Pieces
+
+// MARK: - 1. Swift Package Manager Updates
+
+// MARK: - 1.1. Defining Swift language versions for packages
+
+//let package = Package(name: "Package", swiftLanguageVersions: [.v4_2])
+//let package = Package(name: "Package", swiftLanguageVersions: [.version("5")])
