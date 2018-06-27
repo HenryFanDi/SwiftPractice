@@ -388,3 +388,10 @@ if let circumferenceOffset = MemoryLayout.offset(of: \Circle.circumference),
 } else {
     print("Nil offset values.")
 }
+
+// MARK: - 13. Inline Functions in Modules
+
+let standard = CustomFactorial()
+print(standard.factorial(5))
+let custom = CustomFactorial.init(true)
+print(custom.factorial(5))
