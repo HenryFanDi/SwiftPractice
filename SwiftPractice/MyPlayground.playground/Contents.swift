@@ -352,3 +352,39 @@ case (_, _):
 let value = 10
 withUnsafeBytes(of: value) { pointer in print(pointer.count) }
 withUnsafePointer(to: value) { pointer in print(pointer.hashValue) }
+
+// MARK: - 12. Memory Layout Updates
+
+struct Point {
+    var x, y: Double
+}
+
+struct Circle {
+    var center: Point
+    var radius: Double
+    
+    var circumference: Double {
+        return 2 * .pi * radius
+    }
+    
+    var area: Double {
+        return .pi * radius * radius
+    }
+}
+
+// Use key paths to get the offsets of the circle’s stored properties.
+if let xOffset = MemoryLayout.offset(of: \Circle.center.x),
+    let yOffset = MemoryLayout.offset(of: \Circle.center.y),
+    let radiusOffset = MemoryLayout.offset(of: \Circle.radius) {
+    print("\(xOffset) \(yOffset) \(radiusOffset)")
+} else {
+    print("Nil offset values.")
+}
+
+// Return nil for the offsets of the circle’s computed properties since they aren’t stored inline.
+if let circumferenceOffset = MemoryLayout.offset(of: \Circle.circumference),
+    let areaOffset = MemoryLayout.offset(of: \Circle.area) {
+    print("\(circumferenceOffset) \(areaOffset)")
+} else {
+    print("Nil offset values.")
+}
