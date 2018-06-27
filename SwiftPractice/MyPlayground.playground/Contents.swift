@@ -2,6 +2,9 @@ import UIKit
 
 var str = "Hello, playground"
 
+// What’s New in Swift 4.2?
+// https://www.raywenderlich.com/194066/whats-new-in-swift-4-2
+
 // MARK: - A. Language Improvements
 
 // MARK: - 1. Generating Random Numbers
@@ -404,3 +407,11 @@ print(custom.factorial(5))
 
 //let package = Package(name: "Package", swiftLanguageVersions: [.v4_2])
 //let package = Package(name: "Package", swiftLanguageVersions: [.version("5")])
+
+// MARK: - 2. Removing Implicitly Unwrapped Optionals
+
+// In Swift 4.1, you could use implicitly unwrapped optionals in nested types
+// Swift 4.2 removes them from arrays, dictionaries and tuples
+let favoriteNumbers: [Int?] = [10, nil, 7, nil]
+let favoriteSongs: [String: [String]?] = ["Cosmin": ["Nothing Else Matters", "Stairway to Heaven"], "Oana": nil]
+let credentials: (usermame: String?, password: String?) = ("Cosmin", nil)
